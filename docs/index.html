@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>X16 Office Suite</title>
-<meta name="description" content="A mouse-driven office suite for the Commander X16: X16 Write, X16 Sheets, X16 Files and X16 Calendar. Works on its own from the SD card; ownCloud is optional for sharing with your other devices.">
+<meta name="description" content="A mouse-driven office suite for the Commander X16: X16 Write (with BMX pictures), X16 Sheets, X16 Files and X16 Calendar. Works on its own from the SD card; ownCloud is optional for sharing with your other devices.">
 <link rel="icon" type="image/png" href="img/quill.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,6 +149,10 @@
   .tag.cloud { background: var(--cyan); }
   .more { font-size: 20px; }
 
+  .subhead { display: flex; align-items: center; gap: 10px; margin: 30px 0 0; padding: 4px 12px; background: var(--bar); }
+  .subhead h3 { margin: 0; font-size: 28px; font-weight: normal; color: var(--yellow); }
+  .tag.new { background: var(--pink); color: var(--desk); }
+
   /* ---------- cards (common features) ---------- */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 18px; }
   .card { background: var(--cream); color: var(--ink); padding: 14px 16px; box-shadow: 6px 6px 0 #110822; }
@@ -227,8 +231,8 @@
   <div class="hero">
     <div>
       <h1>X16 Office<br><span>Suite</span></h1>
-      <p class="lead">A word processor, a spreadsheet, a file manager and a calendar for the
-        Commander&nbsp;X16. Driven by the mouse, all in one cheerful look.</p>
+      <p class="lead">A word processor (now with BMX pictures), a spreadsheet, a file manager and a
+        calendar for the Commander&nbsp;X16. Driven by the mouse, all in one cheerful look.</p>
       <div class="actions">
         <a class="pill yellow" href="https://github.com/hermeslohin/cx16officesuite/releases/latest">Download for the SD card</a>
         <a class="pill" href="https://github.com/hermeslohin/cx16officesuite">GitHub</a>
@@ -278,6 +282,7 @@
           <li><b>16 text colours</b> and 16 highlight colours</li>
           <li><b>Bullet and numbered lists</b> with indent and outdent</li>
           <li><b>Tables</b> up to 8 columns x 20 rows: Tab to the next cell, add and delete rows</li>
+          <li><b>Pictures</b>: BMX files from the SD card or ownCloud (<a href="#pictures">see below</a>)</li>
           <li>Up to <b>16 pages</b> with page breaks, page borders and a ruler</li>
           <li>Cut, copy, paste, select all; click, drag and double-click to select</li>
           <li><b>Save As</b> with a folder browser: open folders, go up, make new ones</li>
@@ -285,9 +290,51 @@
         <div class="formats">
           <span class="tag">RTF on the SD card</span>
           <span class="tag cloud">RTF / TXT / DOCX on ownCloud</span>
+          <span class="tag">BMX pictures</span>
         </div>
         <p class="more">Word tables open as X16 Write tables, and X16 Write tables are saved as real Word tables.
           <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/write.md">Full X16 Write guide</a></p>
+      </div>
+    </div>
+
+    <div class="subhead" id="pictures"><h3>Pictures: BMX files</h3><span class="tag new">NEW</span></div>
+    <div class="app flip">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/write-picture.png" width="640" height="480" loading="lazy"
+             alt="X16 Write: a newsletter page with a picture of a sunny landscape with hills and a house in the middle of the text">
+        <figcaption>A BMX picture in the page, between the paragraphs</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Put your X16 art in your documents.</p>
+        <ul class="feat">
+          <li>The <b>Picture</b> button inserts a <b>BMX</b> file, the Commander X16's own bitmap format, from the <b>SD card</b> or from <b>ownCloud</b></li>
+          <li>1, 2, 4 and 8 bits per pixel, up to <b>640 x 1024</b>; scaled to fit the page and never split across two pages</li>
+          <li>Shown in the page in the 16 Sunset colours; the file itself is kept exactly as it was</li>
+          <li><b>Backspace</b> or <b>Delete</b> on a picture removes it; text never runs into a picture</li>
+          <li>Saved inside the document's <b>RTF</b> file, so the document stays one file</li>
+          <li>Several pictures per document: two full-screen 256-colour pictures, or many small ones</li>
+        </ul>
+        <div class="formats">
+          <span class="tag">BMX from the SD card</span>
+          <span class="tag cloud">BMX from ownCloud</span>
+        </div>
+      </div>
+    </div>
+    <div class="app">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/write-bmx-picker.png" width="640" height="480" loading="lazy"
+             alt="X16 Write's Insert picture from ownCloud window: a list of the Documents folder in which only the two .bmx files can be chosen">
+        <figcaption>Insert picture from ownCloud: only the BMX files can be chosen</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Pictures travel to Word and back.</p>
+        <ul class="feat">
+          <li>Save a document to ownCloud as <b>.docx</b> or <b>.rtf</b> and Word shows real pictures, the same size as on the X16</li>
+          <li>Open a Word document on the X16 and its <b>PNG, JPEG, GIF and BMP</b> pictures arrive as BMX pictures</li>
+          <li>An X16 document saved to ownCloud and opened again comes back byte for byte</li>
+          <li>The sync hub does the converting; the X16 only ever sees BMX</li>
+        </ul>
+        <p class="more">Without ownCloud, pictures still work from the SD card; other programs simply skip them in the RTF file.</p>
       </div>
     </div>
   </section>
@@ -427,7 +474,8 @@
       <div class="panel">
         <h3>What ownCloud adds</h3>
         <ul class="feat">
-          <li><b>Write</b> opens and saves RTF, TXT and <b>Word (.docx)</b> in ownCloud's Documents folder</li>
+          <li><b>Write</b> opens and saves RTF, TXT and <b>Word (.docx)</b> in ownCloud's Documents folder, and inserts <b>BMX pictures</b> from it</li>
+          <li><b>Pictures</b> become real pictures in Word, and Word's pictures come to the X16 as BMX</li>
           <li><b>Sheets</b> opens any XLSX or CSV, and saves XLSX or CSV</li>
           <li><b>Files</b> copies and moves files and folders between the SD card and ownCloud</li>
           <li><b>Calendar</b> syncs both ways with an ownCloud calendar your phone can use</li>
@@ -475,7 +523,7 @@
       <table class="list">
         <thead><tr><th>Files on the SD card</th><th>Needed by</th></tr></thead>
         <tbody>
-          <tr><td>X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN</td><td>X16 Write (ownCloud, Save As folder browser, tables)</td></tr>
+          <tr><td>X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN, X16WPPI.BIN, X16WPPL.BIN</td><td>X16 Write (ownCloud, Save As folder browser, tables, pictures and tool tips)</td></tr>
           <tr><td>X16SHEETS.PRG, SHUI.BIN, SHOPS.BIN, SHFILE.BIN, SHXW.BIN, SHXR.BIN, SHSA.BIN</td><td>X16 Sheets (all required)</td></tr>
           <tr><td>X16FM.PRG</td><td>X16 Files</td></tr>
           <tr><td>CALENDAR.PRG</td><td>X16 Calendar</td></tr>

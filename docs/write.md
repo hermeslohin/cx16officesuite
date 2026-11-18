@@ -2,7 +2,8 @@
 
 `LOAD "X16WP.PRG"` and `RUN`. Needs a mouse. Files: `X16WP.PRG`; for ownCloud and the Save As
 folder browser also `X16WPCL.BIN`, `X16WPSA.BIN`, `X16LINK.BIN`, `X16DOCS.BIN` (+ your `X16LINK.KEY`);
-for tables `X16WPTB.BIN`. Without the `.BIN` files X16 Write is a plain SD card word processor.
+for tables `X16WPTB.BIN`; for pictures and tool tips `X16WPPI.BIN` and `X16WPPL.BIN`. Without the `.BIN`
+files X16 Write is a plain SD card word processor.
 
 ## The screen
 
@@ -37,6 +38,24 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 * **Table** button with the cursor in a table: **Add row**, **Delete row**, **Delete table**.
 * Tables are saved as real RTF tables, and as real Word tables in `.docx` on ownCloud; Word
   tables open as X16 Write tables (more than 8 columns are merged into the last one).
+
+## Pictures (BMX)
+
+* **Picture** button (toolbar 1, after Table): **1** = a BMX file from the SD card (type its name),
+  **2** = from ownCloud (the `Documents` list; only `.bmx` files can be chosen). BMX is the
+  Commander X16's bitmap format: version 1, uncompressed, 1, 2, 4 or 8 bits per pixel, up to 640 x 1024.
+* The picture goes on the current line if it is empty, otherwise after the paragraph (or after the
+  table or picture the cursor is in); there is always a line after it to go on writing.
+* It is shown centred in the 16 Sunset colours and scaled to fit: a 320 x 240 picture takes 15 lines.
+  A picture never starts on a page it doesn't fit on.
+* The cursor can sit on a picture: **Backspace** or **Delete** removes it; **Enter**, typing or
+  **Paste** go to a new line after it. Text is never merged into a picture, and a selection that
+  touches a picture deletes the whole picture.
+* Up to 15 pictures in about 200 KB (two full-screen 256-colour pictures, or many small ones).
+* In the **RTF** file the BMX is kept exactly as it was (other programs skip it). On ownCloud the hub
+  makes real pictures of them in `.docx` and `.rtf` for Word, the same size as on the X16; pictures in
+  Word documents (PNG, JPEG, GIF, BMP) arrive as BMX pictures (at most 320 x 240, 256 colours, about
+  160 KB per document; the rest are left out).
 
 ## Files
 

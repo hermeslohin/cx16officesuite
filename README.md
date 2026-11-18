@@ -13,7 +13,7 @@ commits).
 
 | Program | What it does | Guide | Source |
 |---|---|---|---|
-| **X16 Write** `X16WP.PRG` | Word processor: fonts, sizes, colours, lists, tables, pages; RTF on the SD card, RTF/TXT/DOCX on ownCloud | [docs/write.md](docs/write.md) | [commanderx16wp](https://github.com/hermeslohin/commanderx16wp) |
+| **X16 Write** `X16WP.PRG` | Word processor: fonts, sizes, colours, lists, tables, BMX pictures, pages; RTF on the SD card, RTF/TXT/DOCX on ownCloud | [docs/write.md](docs/write.md) | [commanderx16wp](https://github.com/hermeslohin/commanderx16wp) |
 | **X16 Sheets** `X16SHEETS.PRG` | Spreadsheet: formulas, functions, formats; `.xlsx` on the SD card, XLSX/CSV on ownCloud | [docs/sheets.md](docs/sheets.md) | [commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) |
 | **X16 Files** `X16FM.PRG` | File manager: SD card on the left, ownCloud on the right; copy, move, rename, delete, folders | [docs/files.md](docs/files.md) | [commanderx16fm](https://github.com/hermeslohin/commanderx16fm) |
 | **X16 Calendar** `CALENDAR.PRG` | Month calendar; Sync with an ownCloud (CalDAV) calendar | [docs/calendar.md](docs/calendar.md) | [commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) |
@@ -53,7 +53,7 @@ X16Link libraries and the key file.
 
 | File | Needed by |
 |---|---|
-| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables) |
+| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN`, `X16WPPI.BIN`, `X16WPPL.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables, BMX pictures and tool tips) |
 | `X16SHEETS.PRG`, `SHUI.BIN`, `SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN` | X16 Sheets (all required) |
 | `X16FM.PRG` | X16 Files |
 | `CALENDAR.PRG` | X16 Calendar (keeps its events in `CALENDAR.DAT`, sync state in `CALSYNC.DAT`) |
