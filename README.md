@@ -94,3 +94,13 @@ For X16 Files, prefer an SD card image (`-sdcard card.img`): the emulator's host
 Each source repository builds on its own with Prog8 12.3.x, 64tass and Java 11+ (`make`, see its
 README). [VERSIONS.md](VERSIONS.md) lists the commits these binaries were built from and the
 toolchain.
+
+## License
+
+Copyright (C) 2026 hermeslohin
+
+The X16 Office Suite, including every file in `sdcard/`, is free software: you can redistribute it and/or modify it under the terms of the GNU General
+Public License as published by the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version. It is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See [LICENSE](LICENSE) for the full text of the GNU General Public License v3.
