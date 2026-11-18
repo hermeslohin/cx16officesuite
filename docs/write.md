@@ -14,7 +14,9 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 * **Toolbar 2**: Bold, Italic, Underline, Align left / center / right, Bullets, Numbers, Outdent,
   Indent, and the **font box** (click it: 3 monospace fonts - Courier New, Lucida Console, Andale
   Mono - and two sizes, **12 pt** and **24 pt**).
-* **Row 3**: 16 text colours and 16 highlight colours.
+* **Row 3**: 16 text colours and 16 highlight colours. On the X16 they show in the Sunset colours
+  (red is a hot pink, for example); saved RTF, TXT and DOCX files use the standard colours, so a
+  document looks the same in other programs as before.
 
 ## Editing
 

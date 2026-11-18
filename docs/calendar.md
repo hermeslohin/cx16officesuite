@@ -7,11 +7,11 @@ Set the X16's clock so **Today** knows the date (the hub also sets it at every S
 ## The screen
 
 Title bar with the close box - toolbar - entry bar (selected date, Cancel, OK, the event text) -
-month grid (each day shows its first two events; `+n more`) - the selected day's events - status
-bar with tool tips.
+month grid (each day shows its first two events as coloured chips; `+n more`; today is yellow, the
+selected day pink) - the selected day's events - status bar with tool tips.
 
 **Toolbar**: New, Edit, Delete, Cut, Copy, Paste, Today, previous / next year, previous / next
-month, **Sync** (cloud) and **Conflicts** (warning sign; highlighted when there are any). The right
+month, **Sync** (cloud) and **Conflicts** (warning sign; pink when there are any). The right
 side shows the month and how many of the 128 event slots are used.
 
 ## Using it

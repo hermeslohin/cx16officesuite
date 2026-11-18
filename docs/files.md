@@ -10,9 +10,9 @@ folders between the two or inside one of them; rename, delete, make folders.
 ## The screen
 
 Title bar with the close box - toolbar - two panes (title, folder path, column header, list with
-a scroll bar, item count) - status bar. The **active pane** has a blue title; the toolbar's arrows
+a scroll bar, item count) - status bar. The **active pane** has a pink title; the toolbar's arrows
 point from it to the other pane. Rows: `..` (to go up), then folders (blue, `/`), then files, each
-sorted by name. The status bar shows the selected file's size (and date, on ownCloud). Grey files
+sorted by name. The status bar shows the selected file's size (and date, on ownCloud). Dimmed files
 can't be transferred (name not representable, or over 1 MiB).
 
 ## Mouse

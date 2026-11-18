@@ -1,13 +1,14 @@
 # Versions
 
-The files in `sdcard/` were built on 2026-11-18 from fresh clones of these commits:
+The files in `sdcard/` were built on 2026-11-18 from fresh clones of these commits (the four apps: their
+`sunset-theme` branches, the Sunset Arcade look):
 
 | Component | Repository | Commit | Files |
 |---|---|---|---|
-| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`e277303`](https://github.com/hermeslohin/commanderx16wp/commit/e27730357701404d3725ce35ced1dda3b15ee3f4) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN |
-| X16 Sheets | [hermeslohin/commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) | [`810002c`](https://github.com/hermeslohin/commanderx16sheets/commit/810002c8880fa71eed33e44bb535d6c4010eda0c) | X16SHEETS.PRG, SHUI/SHOPS/SHFILE/SHXW/SHXR/SHSA.BIN |
-| X16 Files | [hermeslohin/commanderx16fm](https://github.com/hermeslohin/commanderx16fm) | [`a1284ae`](https://github.com/hermeslohin/commanderx16fm/commit/a1284aea84d075af5d06b3fcecab60e2a8cb892b) | X16FM.PRG |
-| X16 Calendar | [hermeslohin/commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) | [`3f728ad`](https://github.com/hermeslohin/commanderx16calendar/commit/3f728add217731cd8fc0cdb56bce3ab835a2099c) | CALENDAR.PRG |
+| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`6b113ea`](https://github.com/hermeslohin/commanderx16wp/commit/6b113ea57dc803a2d7eae8b0027d3fc8617b1d94) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN |
+| X16 Sheets | [hermeslohin/commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) | [`d3f3b2c`](https://github.com/hermeslohin/commanderx16sheets/commit/d3f3b2cbcca26e9dde893bb2de9b44af07aabbe6) | X16SHEETS.PRG, SHUI/SHOPS/SHFILE/SHXW/SHXR/SHSA.BIN |
+| X16 Files | [hermeslohin/commanderx16fm](https://github.com/hermeslohin/commanderx16fm) | [`100560c`](https://github.com/hermeslohin/commanderx16fm/commit/100560ca009379e667786dd28853e77ec005d2e9) | X16FM.PRG |
+| X16 Calendar | [hermeslohin/commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) | [`2de10de`](https://github.com/hermeslohin/commanderx16calendar/commit/2de10de11ded0fb53a8a2e21b37981a7b090f6e8) | CALENDAR.PRG |
 | Sync hub + X16Link library | [hermeslohin/x16-office-hub](https://github.com/hermeslohin/x16-office-hub) | [`b8eb09f`](https://github.com/hermeslohin/x16-office-hub/commit/b8eb09feed5d69fcf003e415e3bde4765a1a1c06) | X16LINK.BIN, X16DOCS.BIN; image ghcr.io/hermeslohin/x16-office-hub:sha-b8eb09f |
 
 `X16LINK.BIN` and `X16DOCS.BIN` come out byte-identical from every app's vendored copy of the X16Link library; one copy serves all the apps. Checksums: [SHA256SUMS](SHA256SUMS).
@@ -19,4 +20,4 @@ The files in `sdcard/` were built on 2026-11-18 from fresh clones of these commi
 
 ## Rebuilding
 
-Clone a repository at the commit above and run `make` (Calendar: `make sd SD=<dir>`; Write: `./build-cloud.sh <dir>`; Sheets and Files: `./build.sh <dir>`). Each copies its files under the names used here.
+Clone a repository at the commit above and run `make` (Calendar: `make sd SD=<dir>`, with the folder made first; Write: `./build-cloud.sh <dir>`; Sheets and Files: `./build.sh <dir>`). Each copies its files under the names used here.

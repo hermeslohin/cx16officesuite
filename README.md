@@ -62,9 +62,14 @@ The files' SHA-256 checksums are in [SHA256SUMS](SHA256SUMS).
 
 ## Common to all the apps
 
-* **Same look**: title bar with the close box at the top right, an icon toolbar (hover for a tool
-  tip in the status bar), dialogs with mouse buttons and keyboard shortcuts (Enter = OK,
-  Esc = Cancel).
+* **Same look**, the **Sunset Arcade** theme: a striped title bar with the close box at the top
+  right, a toolbar of coloured buttons (hover for a tool tip in the status bar), cream pages and
+  lists on a dark violet desk, dialogs with mouse buttons and keyboard shortcuts (Enter = OK,
+  Esc = Cancel). **Quill**, a little pencil at the left end of the status bar, blinks now and then
+  and hops when something went well (a save, a copy, a sync).
+* **Your documents keep their colours.** The theme only changes how the 16 colours look on the
+  X16's screen (red shows as a hot pink, for example); RTF and XLSX files are saved with the
+  original colours, so they look the same in other programs as before.
 * **Save As has folders** (Write and Sheets), on the SD card and on ownCloud: double-click a
   folder to open it, `..` / **[ Up ]** to go up, **[New folder]** or **F7** to make one.
 * **ownCloud never overwrites silently.** If a file changed in ownCloud since you opened it, or a
