@@ -8,7 +8,7 @@ The files in `sdcard/` were built on 2026-11-18 from fresh clones of these commi
 | X16 Sheets | [hermeslohin/commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) | [`810002c`](https://github.com/hermeslohin/commanderx16sheets/commit/810002c8880fa71eed33e44bb535d6c4010eda0c) | X16SHEETS.PRG, SHUI/SHOPS/SHFILE/SHXW/SHXR/SHSA.BIN |
 | X16 Files | [hermeslohin/commanderx16fm](https://github.com/hermeslohin/commanderx16fm) | [`a1284ae`](https://github.com/hermeslohin/commanderx16fm/commit/a1284aea84d075af5d06b3fcecab60e2a8cb892b) | X16FM.PRG |
 | X16 Calendar | [hermeslohin/commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) | [`3f728ad`](https://github.com/hermeslohin/commanderx16calendar/commit/3f728add217731cd8fc0cdb56bce3ab835a2099c) | CALENDAR.PRG |
-| Sync hub + X16Link library | [hermeslohin/x16-office-hub](https://github.com/hermeslohin/x16-office-hub) | [`b4760d2`](https://github.com/hermeslohin/x16-office-hub/commit/b4760d22614848c8fd34473cf4438e6f78a23b9f) | X16LINK.BIN, X16DOCS.BIN; image ghcr.io/hermeslohin/x16-office-hub:sha-b4760d2 |
+| Sync hub + X16Link library | [hermeslohin/x16-office-hub](https://github.com/hermeslohin/x16-office-hub) | [`b8eb09f`](https://github.com/hermeslohin/x16-office-hub/commit/b8eb09feed5d69fcf003e415e3bde4765a1a1c06) | X16LINK.BIN, X16DOCS.BIN; image ghcr.io/hermeslohin/x16-office-hub:sha-b8eb09f |
 
 `X16LINK.BIN` and `X16DOCS.BIN` come out byte-identical from every app's vendored copy of the X16Link library; one copy serves all the apps. Checksums: [SHA256SUMS](SHA256SUMS).
 
