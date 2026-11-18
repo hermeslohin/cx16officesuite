@@ -1,12 +1,12 @@
 # Versions
 
 The files in `sdcard/` were built on 2026-11-18 from fresh clones of these commits (Sunset Arcade look; X16 Write
-with tables, 12/18/24/36 pt and BMX pictures, and the hub that converts them to and from DOCX; X16 Write and
+with tables, 12/18/24/36 pt, BMX pictures and up to 64 pages with more RAM, and the hub that converts them to and from DOCX; X16 Write and
 X16 Sheets without the flashing title bar, toolbars and status bar):
 
 | Component | Repository | Commit | Files |
 |---|---|---|---|
-| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`f0a5a80`](https://github.com/hermeslohin/commanderx16wp/commit/f0a5a8002e08cbecfdeaf20ba0c678e66235afb8) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN, X16WPPI.BIN, X16WPPL.BIN |
+| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`50fc2e5`](https://github.com/hermeslohin/commanderx16wp/commit/50fc2e5fcabf862a354c45346c6a3ff5344b2959) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN, X16WPPI.BIN, X16WPPL.BIN |
 | X16 Sheets | [hermeslohin/commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) | [`0324777`](https://github.com/hermeslohin/commanderx16sheets/commit/032477746d13d940778145155d4d51c725206819) | X16SHEETS.PRG, SHUI/SHOPS/SHFILE/SHXW/SHXR/SHSA.BIN |
 | X16 Files | [hermeslohin/commanderx16fm](https://github.com/hermeslohin/commanderx16fm) | [`100560c`](https://github.com/hermeslohin/commanderx16fm/commit/100560ca009379e667786dd28853e77ec005d2e9) | X16FM.PRG |
 | X16 Calendar | [hermeslohin/commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) | [`2de10de`](https://github.com/hermeslohin/commanderx16calendar/commit/2de10de11ded0fb53a8a2e21b37981a7b090f6e8) | CALENDAR.PRG |
