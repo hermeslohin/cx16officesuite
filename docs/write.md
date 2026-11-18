@@ -1,8 +1,8 @@
 # X16 Write - word processor
 
 `LOAD "X16WP.PRG"` and `RUN`. Needs a mouse. Files: `X16WP.PRG`; for ownCloud and the Save As
-folder browser also `X16WPCL.BIN`, `X16WPSA.BIN`, `X16LINK.BIN`, `X16DOCS.BIN` (+ your `X16LINK.KEY`).
-Without the `.BIN` files X16 Write is a plain SD card word processor.
+folder browser also `X16WPCL.BIN`, `X16WPSA.BIN`, `X16LINK.BIN`, `X16DOCS.BIN` (+ your `X16LINK.KEY`);
+for tables `X16WPTB.BIN`. Without the `.BIN` files X16 Write is a plain SD card word processor.
 
 ## The screen
 
@@ -10,7 +10,7 @@ Row 0: title (file name, *modified*, page *n of m*) and the close box. Rows 1-2:
 Row 3: text and highlight colour swatches. Row 4: ruler. Then the page view with page borders and
 a scroll bar, and the status bar (tool tips when you hover over an icon).
 
-* **Toolbar 1**: New, Open, Save, Save As, Cut, Copy, Paste, Select All, Page Break.
+* **Toolbar 1**: New, Open, Save, Save As, Cut, Copy, Paste, Select All, Page Break, **Table**.
 * **Toolbar 2**: Bold, Italic, Underline, Align left / center / right, Bullets, Numbers, Outdent,
   Indent, and the **font box** (click it: 3 monospace fonts - Courier New, Lucida Console, Andale
   Mono - and two sizes, **12 pt** and **24 pt**).
@@ -26,6 +26,17 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 * Formatting buttons apply to the selection, or to what you type next.
 * A page is 64 columns x 54 lines (prints as 12 pt, 10 characters per inch, 1" margins);
   up to 16 pages. Clipboard: 2700 characters.
+
+## Tables
+
+* **Table** button: type the size as `columns x rows`, up to **8 x 20** (for example `4x3`). The
+  table goes on the current line if it is empty, otherwise after the paragraph. Columns are
+  equal (with 8 columns a cell holds 6 characters, with 4 columns 14).
+* Type in a cell. **Tab** = next cell (after the last cell a new row is added); **Enter** = same cell
+  one row down, and out of the table from its last row. Formatting and colours work in cells.
+* **Table** button with the cursor in a table: **Add row**, **Delete row**, **Delete table**.
+* Tables are saved as real RTF tables, and as real Word tables in `.docx` on ownCloud; Word
+  tables open as X16 Write tables (more than 8 columns are merged into the last one).
 
 ## Files
 
