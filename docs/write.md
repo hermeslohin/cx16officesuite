@@ -13,7 +13,7 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 * **Toolbar 1**: New, Open, Save, Save As, Cut, Copy, Paste, Select All, Page Break, **Table**.
 * **Toolbar 2**: Bold, Italic, Underline, Align left / center / right, Bullets, Numbers, Outdent,
   Indent, and the **font box** (click it: 3 monospace fonts - Courier New, Lucida Console, Andale
-  Mono - and two sizes, **12 pt** and **24 pt**).
+  Mono - and four sizes, **12**, **18**, **24** and **36 pt**).
 * **Row 3**: 16 text colours and 16 highlight colours. On the X16 they show in the Sunset colours
   (red is a hot pink, for example); saved RTF, TXT and DOCX files use the standard colours, so a
   document looks the same in other programs as before.
@@ -71,4 +71,5 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 ## Good to know
 
 * Opening RTF from other programs: colours map by index, one font family per run.
-* Large (24 pt) characters take 2 x 2 cells; a line with large text is two rows high.
+* 18 and 24 pt characters take 2 x 2 cells, 36 pt 3 x 3 cells; a line is as high as its biggest
+  character (36 pt: 21 characters a line). Word documents' sizes open as the nearest of the four.
