@@ -5,6 +5,8 @@ Ready-to-run builds and user guides for a mouse-driven office suite for the
 and a calendar. They share one look, and they all work with your own **ownCloud** server for
 documents and the calendar, through a small sync hub on your network.
 
+**Website with screenshots of every app: https://hermeslohin.github.io/cx16officesuite/**
+
 This repository holds **no source code**. It has the built programs (`sdcard/`), the instructions,
 and links to the repositories each part is built from (see [VERSIONS.md](VERSIONS.md) for the exact
 commits).

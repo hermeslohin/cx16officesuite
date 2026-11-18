@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X16 Office Suite</title>
+<meta name="description" content="A mouse-driven office suite for the Commander X16: X16 Write, X16 Sheets, X16 Files and X16 Calendar. Works on its own from the SD card; ownCloud is optional for sharing with your other devices.">
+<link rel="icon" type="image/png" href="img/quill.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  /* Sunset Arcade - the X16 Office palette, sampled from the apps */
+  :root {
+    --desk: #221133;      /* C_BLACK: the desk */
+    --bar: #332266;       /* C_DGRAY: toolbars */
+    --face: #665599;      /* C_GRAY: button faces */
+    --lav: #ccbbff;       /* C_LGRAY: info rows, dialogs */
+    --cream: #ffeedd;     /* C_WHITE: pages, lists, cells */
+    --pink: #ff4488;      /* C_RED: selection, title */
+    --orange: #ff9933;
+    --yellow: #ffdd44;
+    --cyan: #44dddd;
+    --blue: #3366ee;
+    --green: #44bb44;
+    --violet: #9988ff;
+    --ink: #221133;
+    --cell: 8px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body {
+    margin: 0;
+    background-color: var(--desk);
+    /* the starry desk */
+    background-image:
+      radial-gradient(1.5px 1.5px at 23px 31px, #665599 99%, transparent),
+      radial-gradient(1.5px 1.5px at 141px 87px, #9988ff 99%, transparent),
+      radial-gradient(1px 1px at 87px 150px, #665599 99%, transparent),
+      radial-gradient(2px 2px at 199px 201px, #665599 99%, transparent),
+      radial-gradient(1px 1px at 61px 233px, #9988ff 99%, transparent);
+    background-size: 240px 260px;
+    color: var(--cream);
+    font-family: "VT323", ui-monospace, "Courier New", monospace;
+    font-size: 22px;
+    line-height: 1.25;
+    -webkit-font-smoothing: none;
+  }
+  a { color: var(--yellow); }
+  a:hover { color: var(--orange); }
+  img.px { image-rendering: pixelated; image-rendering: crisp-edges; }
+  code.cmd { display: block; padding: 4px 8px; overflow-x: auto; white-space: nowrap; }
+  code { font-family: inherit; background: var(--bar); color: var(--yellow); padding: 0 4px; }
+
+  /* ---------- title bar: pink, zigzag, orange (theme.stripes) ---------- */
+  .titlebar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; gap: 10px;
+    min-height: 44px; padding: 0 10px;
+    background:
+      linear-gradient(135deg, transparent 50%, var(--orange) 50%) 0 100% / 8px 8px repeat-x,
+      linear-gradient(225deg, transparent 50%, var(--orange) 50%) 4px 100% / 8px 8px repeat-x,
+      linear-gradient(var(--pink) 0 55%, var(--orange) 55% 100%);
+  }
+  .chip { display: inline-block; background: var(--desk); color: var(--cream); padding: 0 10px; line-height: 30px; white-space: nowrap; }
+  .chip.brand { color: var(--yellow); letter-spacing: 1px; }
+  .titlebar nav { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+  .titlebar nav a { text-decoration: none; box-shadow: 0 0 0 2px var(--desk); }
+  .close {
+    background: var(--desk); color: var(--pink); padding: 2px 8px; text-decoration: none;
+  }
+
+  /* ---------- pill buttons (theme.pill) ---------- */
+  .pill {
+    display: inline-block; text-decoration: none; color: var(--cream);
+    background: var(--face); border-radius: 999px; padding: 2px 14px;
+    border: 0; font: inherit; cursor: pointer;
+  }
+  .pill:hover { background: var(--violet); color: var(--desk); }
+  .pill.pink { background: var(--pink); }
+  .pill.orange { background: var(--orange); color: var(--desk); }
+  .pill.cyan { background: var(--cyan); color: var(--desk); }
+  .pill.yellow { background: var(--yellow); color: var(--desk); }
+  .pill.small { font-size: 20px; padding: 0 10px; }
+
+  .hero > *, .app > *, .two > *, .cards > *, .flow > * { min-width: 0; }
+  main { max-width: 1120px; margin: 0 auto; padding: 0 16px 40px; }
+
+  /* ---------- hero ---------- */
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 32px; align-items: center; padding: 48px 0 24px; }
+  .hero h1 { font-size: clamp(48px, 8vw, 84px); line-height: .9; margin: 0 0 12px; color: var(--yellow); font-weight: normal; }
+  .hero h1 span { color: var(--pink); }
+  .hero p.lead { font-size: 27px; margin: 0 0 18px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+  .apps-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .apps-row a { text-decoration: none; }
+
+  /* ---------- an X16 "window" around a screenshot ---------- */
+  .window { background: var(--bar); border: 4px solid var(--bar); box-shadow: 8px 8px 0 #110822; }
+  .window .wbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    height: 28px; padding: 0 6px; font-size: 20px;
+    background:
+      linear-gradient(135deg, transparent 50%, var(--orange) 50%) 0 100% / 6px 6px repeat-x,
+      linear-gradient(225deg, transparent 50%, var(--orange) 50%) 3px 100% / 6px 6px repeat-x,
+      linear-gradient(var(--pink) 0 55%, var(--orange) 55% 100%);
+  }
+  .window .wbar .chip { padding: 0 8px; }
+  .window img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+  .window figcaption { background: var(--desk); color: var(--lav); font-size: 19px; padding: 4px 10px; }
+
+  /* ---------- notice ("works on its own") ---------- */
+  .notice {
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
+    background: var(--cream); color: var(--ink); padding: 18px 22px; margin: 24px 0 8px;
+    border-left: 12px solid var(--yellow); box-shadow: 8px 8px 0 #110822;
+  }
+  .notice img { width: 60px; height: auto; }
+  .notice h2 { margin: 0 0 6px; font-size: 32px; font-weight: normal; color: var(--pink); }
+  .notice p { margin: 0 0 8px; }
+  .notice b { color: var(--blue); font-weight: normal; }
+
+  /* ---------- section headings: a "pane title" strip ---------- */
+  section { margin-top: 56px; }
+  .pane-title {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    background: var(--pink); color: var(--desk); padding: 4px 12px; margin: 0;
+  }
+  .pane-title h2 { margin: 0; font-size: 34px; font-weight: normal; }
+  .pane-title .file { background: var(--desk); color: var(--cream); padding: 0 8px; font-size: 20px; }
+  .pane-title.lav { background: var(--lav); }
+  .pane-title.yellow { background: var(--yellow); }
+  .pane-title.cyan { background: var(--cyan); }
+  .pane-title.orange { background: var(--orange); }
+  .pathrow { background: var(--lav); color: var(--ink); padding: 2px 12px; font-size: 20px; }
+
+  /* ---------- app sections ---------- */
+  .app { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 24px 0 0; align-items: start; }
+  .app.flip .shot { order: 2; }
+  .app p.tagline { font-size: 26px; margin: 0 0 12px; color: var(--yellow); }
+  ul.feat { list-style: none; padding: 0; margin: 0 0 14px; }
+  ul.feat li { position: relative; padding-left: 26px; margin-bottom: 6px; }
+  ul.feat li::before {
+    content: ""; position: absolute; left: 4px; top: 8px; width: 10px; height: 10px; background: var(--pink);
+  }
+  ul.feat li b { color: var(--yellow); font-weight: normal; }
+  .formats { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+  .tag { background: var(--cream); color: var(--ink); padding: 0 8px; font-size: 20px; }
+  .tag.cloud { background: var(--cyan); }
+  .more { font-size: 20px; }
+
+  /* ---------- cards (common features) ---------- */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 18px; }
+  .card { background: var(--cream); color: var(--ink); padding: 14px 16px; box-shadow: 6px 6px 0 #110822; }
+  .card h3 { margin: 0 0 6px; font-size: 26px; font-weight: normal; color: var(--pink); }
+  .card p { margin: 0; }
+
+  /* ---------- the ownCloud diagram ---------- */
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 10px; margin: 22px 0 10px; }
+  .node { background: var(--cream); color: var(--ink); padding: 10px 12px; text-align: center; box-shadow: 6px 6px 0 #110822; min-height: 104px; display: flex; flex-direction: column; justify-content: center; }
+  .node b { display: block; font-weight: normal; color: var(--pink); font-size: 25px; }
+  .node.opt { outline: 3px dashed var(--cyan); outline-offset: 4px; }
+  .arrow { color: var(--yellow); font-size: 30px; text-align: center; }
+  .arrow small { display: block; font-size: 17px; color: var(--lav); }
+  .badge { display: inline-block; background: var(--cyan); color: var(--desk); padding: 0 8px; font-size: 19px; vertical-align: middle; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .panel { background: var(--bar); padding: 14px 18px; }
+  .panel h3 { margin: 0 0 8px; font-size: 27px; font-weight: normal; color: var(--yellow); }
+  .panel ol { margin: 0; padding-left: 28px; }
+  .panel li { margin-bottom: 6px; }
+
+  /* ---------- table of SD files ---------- */
+  table.list { width: 100%; border-collapse: collapse; background: var(--cream); color: var(--ink); font-size: 21px; }
+  table.list th { background: var(--yellow); text-align: left; padding: 2px 10px; font-weight: normal; }
+  table.list td { padding: 2px 10px; border-top: 1px solid var(--lav); vertical-align: top; }
+  table.list td:first-child { color: var(--blue); }
+  .tablewrap { overflow-x: auto; box-shadow: 6px 6px 0 #110822; margin-top: 18px; }
+
+  /* ---------- status bar footer with Quill ---------- */
+  footer.status {
+    position: sticky; bottom: 0; z-index: 10;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--desk); border-top: 2px solid var(--bar); padding: 4px 12px; font-size: 20px;
+  }
+  footer.status img { width: 22px; animation: hop 6s steps(1) infinite; }
+  footer.status .right { margin-left: auto; color: var(--yellow); }
+  @keyframes hop { 0%, 90%, 100% { transform: none; } 92%, 96% { transform: translateY(-5px); } }
+  @media (prefers-reduced-motion: reduce) { footer.status img { animation: none; } }
+
+  @media (max-width: 860px) {
+    .hero, .app, .two { grid-template-columns: 1fr; }
+    .app.flip .shot { order: 0; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .flow { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); }
+    .arrow small { transform: rotate(-90deg); }
+    .titlebar nav .hide-sm { display: none; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 21px; }
+    .cards { grid-template-columns: 1fr; }
+    .notice { grid-template-columns: 1fr; }
+    .titlebar { flex-wrap: wrap; padding: 6px 10px; }
+    .titlebar nav { margin-left: 0; }
+    .close, .hide-xs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="titlebar">
+  <span class="chip brand">X16 OFFICE</span>
+  <span class="chip hide-xs">for the Commander X16</span>
+  <nav aria-label="Sections">
+    <a class="pill small pink" href="#write">Write</a>
+    <a class="pill small orange" href="#sheets">Sheets</a>
+    <a class="pill small cyan" href="#files">Files</a>
+    <a class="pill small yellow" href="#calendar">Calendar</a>
+    <a class="pill small hide-sm" href="#owncloud">ownCloud</a>
+    <a class="pill small hide-sm" href="#get">Get it</a>
+  </nav>
+  <a class="close" href="https://github.com/hermeslohin/cx16officesuite" title="Repository on GitHub">X</a>
+</header>
+
+<main>
+
+  <div class="hero">
+    <div>
+      <h1>X16 Office<br><span>Suite</span></h1>
+      <p class="lead">A word processor, a spreadsheet, a file manager and a calendar for the
+        Commander&nbsp;X16. Driven by the mouse, all in one cheerful look.</p>
+      <div class="actions">
+        <a class="pill yellow" href="https://github.com/hermeslohin/cx16officesuite/releases/latest">Download for the SD card</a>
+        <a class="pill" href="https://github.com/hermeslohin/cx16officesuite">GitHub</a>
+      </div>
+      <div class="apps-row">
+        <a class="tag" href="#write">X16WP.PRG</a>
+        <a class="tag" href="#sheets">X16SHEETS.PRG</a>
+        <a class="tag" href="#files">X16FM.PRG</a>
+        <a class="tag" href="#calendar">CALENDAR.PRG</a>
+      </div>
+    </div>
+    <figure class="window" style="margin:0">
+      <img class="px" src="img/write.png" width="640" height="480"
+           alt="X16 Write showing a newsletter with a big pink title, bold, italic and coloured text, a bullet list and a table">
+      <figcaption>X16 Write, running on the X16 emulator</figcaption>
+    </figure>
+  </div>
+
+  <div class="notice" role="note">
+    <img class="px" src="img/quill.png" alt="" width="15" height="16">
+    <div>
+      <h2>No server needed</h2>
+      <p>Every app works <b>on its own, from the SD card</b>. Copy the files, <code>LOAD</code>, <code>RUN</code>, done.
+        No network card, no hub, no ownCloud account.</p>
+      <p>Your work is saved as ordinary <b>RTF</b> and <b>XLSX</b> files, so you can carry the SD card to a PC and open them in Word,
+        Excel or LibreOffice.</p>
+      <p style="margin:0"><b>ownCloud is the optional extra</b>: add it and your X16 shares documents, spreadsheets and your calendar
+        with your laptop, phone and anything else that talks to ownCloud. <a href="#owncloud">How that works</a></p>
+    </div>
+  </div>
+
+  <!-- ===================== WRITE ===================== -->
+  <section id="write" aria-labelledby="h-write">
+    <div class="pane-title"><h2 id="h-write">X16 Write</h2><span class="file">X16WP.PRG</span></div>
+    <div class="pathrow">word processor</div>
+    <div class="app">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/write.png" width="640" height="480" loading="lazy"
+             alt="X16 Write: icon toolbars, colour swatches, a ruler and a page with formatted text, a bullet list and a 4 column table">
+        <figcaption>Fonts, sizes, colours, a bullet list and a table on one page</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Real documents: formatting, lists, tables and pages.</p>
+        <ul class="feat">
+          <li><b>Bold, italic, underline</b>, left / centre / right alignment</li>
+          <li>Three fonts (Courier New, Lucida Console, Andale Mono) in <b>12, 18, 24 and 36 pt</b></li>
+          <li><b>16 text colours</b> and 16 highlight colours</li>
+          <li><b>Bullet and numbered lists</b> with indent and outdent</li>
+          <li><b>Tables</b> up to 8 columns x 20 rows: Tab to the next cell, add and delete rows</li>
+          <li>Up to <b>16 pages</b> with page breaks, page borders and a ruler</li>
+          <li>Cut, copy, paste, select all; click, drag and double-click to select</li>
+          <li><b>Save As</b> with a folder browser: open folders, go up, make new ones</li>
+        </ul>
+        <div class="formats">
+          <span class="tag">RTF on the SD card</span>
+          <span class="tag cloud">RTF / TXT / DOCX on ownCloud</span>
+        </div>
+        <p class="more">Word tables open as X16 Write tables, and X16 Write tables are saved as real Word tables.
+          <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/write.md">Full X16 Write guide</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SHEETS ===================== -->
+  <section id="sheets" aria-labelledby="h-sheets">
+    <div class="pane-title orange"><h2 id="h-sheets">X16 Sheets</h2><span class="file">X16SHEETS.PRG</span></div>
+    <div class="pathrow">spreadsheet</div>
+    <div class="app flip">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/sheets.png" width="640" height="480" loading="lazy"
+             alt="X16 Sheets: a household budget with currency values, SUM totals and averages, a MAX formula being typed in the formula bar">
+        <figcaption>A budget with SUM, AVERAGE and MAX; the formula bar shows the formula being typed</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Formulas that recalculate, formats that stick.</p>
+        <ul class="feat">
+          <li><b>Formulas</b> with <code>+ - * / ^ %</code>, comparisons and parentheses</li>
+          <li><b>Functions</b>: SUM, AVERAGE, MIN, MAX, COUNT, PRODUCT, ABS, SQRT, INT, ROUND, IF</li>
+          <li>Relative and <b>absolute references</b> (<code>$A$1</code>), ranges, click or drag to insert them</li>
+          <li><b>AutoSum</b>, and a live <b>Sum and Count</b> of the selection in the status bar</li>
+          <li>Number formats: General, 0.00, <b>Percent</b>, <b>Currency</b></li>
+          <li><b>Insert and delete rows and columns</b>; formulas follow</li>
+          <li>Copy and paste adjust references; paste one cell over a range to fill it</li>
+          <li>Columns A-IV, rows 1-9999, up to 12,288 cells with 2 MB of RAM</li>
+        </ul>
+        <div class="formats">
+          <span class="tag">XLSX on the SD card</span>
+          <span class="tag cloud">XLSX / CSV on ownCloud</span>
+        </div>
+        <p class="more">Sheets are real <code>.xlsx</code> files that Excel, LibreOffice and ownCloud open as they are.
+          <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/sheets.md">Full X16 Sheets guide</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FILES ===================== -->
+  <section id="files" aria-labelledby="h-files">
+    <div class="pane-title cyan"><h2 id="h-files">X16 Files</h2><span class="file">X16FM.PRG</span></div>
+    <div class="pathrow">file manager</div>
+    <div class="app">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/files.png" width="640" height="480" loading="lazy"
+             alt="X16 Files: two panes, the X16 SD card on the left and ownCloud Documents on the right with folders and files">
+        <figcaption>SD card on the left, ownCloud on the right. The photo is greyed out because it is over 1 MiB</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Two panes: your SD card and your cloud, side by side.</p>
+        <ul class="feat">
+          <li><b>Drag files across</b> to copy them; drag onto a folder to move them</li>
+          <li><b>Right click</b> to mark several files, then copy, move or delete them all</li>
+          <li>Copy, Move, Duplicate, Rename, Delete and <b>New folder</b> buttons, with F-key shortcuts</li>
+          <li>Whole <b>folders</b> copy and delete with everything inside</li>
+          <li>Sizes, and dates on ownCloud, in the status bar</li>
+          <li>Without ownCloud the left pane is a full <b>SD card file manager</b> on its own</li>
+        </ul>
+        <div class="formats">
+          <span class="tag">SD card</span>
+          <span class="tag cloud">ownCloud Documents</span>
+        </div>
+        <p class="more">Files up to 1 MiB travel in either direction, and a dropped Wi-Fi connection picks up where it stopped.
+          <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/files.md">Full X16 Files guide</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CALENDAR ===================== -->
+  <section id="calendar" aria-labelledby="h-cal">
+    <div class="pane-title yellow"><h2 id="h-cal">X16 Calendar</h2><span class="file">CALENDAR.PRG</span></div>
+    <div class="pathrow">calendar</div>
+    <div class="app flip">
+      <figure class="window shot" style="margin:0">
+        <img class="px" src="img/calendar.png" width="640" height="480" loading="lazy"
+             alt="X16 Calendar: a month grid for November 2026 with coloured event chips, today highlighted, and today's events listed below">
+        <figcaption>Month view with event chips; the selected day's events are listed underneath</figcaption>
+      </figure>
+      <div>
+        <p class="tagline">Your month at a glance, on your phone too.</p>
+        <ul class="feat">
+          <li><b>Month grid</b> with coloured event chips; today in yellow, the selected day in pink</li>
+          <li><b>Just start typing</b> to add an event; start with a time (<code>14:30 Dentist</code>) for a timed one</li>
+          <li><b>Drag</b> an event to another day to move it; cut, copy and paste events</li>
+          <li>Jump by month or year, or straight back to <b>Today</b></li>
+          <li>Saved to <code>CALENDAR.DAT</code> after every change</li>
+          <li><b>Sync</b> with an ownCloud calendar: new, changed and deleted events go both ways</li>
+          <li><b>Conflicts</b> are never lost: the X16 version is kept and the differences are listed</li>
+        </ul>
+        <div class="formats">
+          <span class="tag">CALENDAR.DAT on the SD card</span>
+          <span class="tag cloud">ownCloud calendar (CalDAV)</span>
+        </div>
+        <p class="more">Add an event on your phone, press Sync on the X16, and it is there.
+          <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/calendar.md">Full X16 Calendar guide</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMON ===================== -->
+  <section id="common" aria-labelledby="h-common">
+    <div class="pane-title lav"><h2 id="h-common">In every app</h2></div>
+    <div class="cards">
+      <div class="card"><h3>One look</h3><p>The Sunset Arcade theme: striped title bar, coloured toolbar buttons, cream pages on a starry desk.
+        Learn one app and you know them all.</p></div>
+      <div class="card"><h3>Mouse first</h3><p>Click, drag, double-click, right click and the wheel all do what you expect.
+        Hover over a button and its tip appears in the status bar.</p></div>
+      <div class="card"><h3>Keyboard too</h3><p>Dialogs answer to Enter and Esc, and the common actions have keys.
+        Arrows, Home, PgUp and PgDn work where they should.</p></div>
+      <div class="card"><h3>Your colours, kept</h3><p>The theme only changes how colours look on the X16's screen.
+        Saved files keep the standard colours, so they look right everywhere else.</p></div>
+      <div class="card"><h3>Folders</h3><p>Save As in Write and Sheets browses folders on the SD card and on ownCloud,
+        and can make new ones (F7).</p></div>
+      <div class="card"><h3>Meet Quill</h3><p>The little pencil at the left of the status bar blinks now and then,
+        and hops when something went well: a save, a copy, a sync.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== OWNCLOUD ===================== -->
+  <section id="owncloud" aria-labelledby="h-oc">
+    <div class="pane-title cyan"><h2 id="h-oc">Share with your other devices</h2><span class="badge" style="background:var(--desk);color:var(--cyan)">optional</span></div>
+    <div class="pathrow">ownCloud: not required, but it opens the X16 up to everything else you own</div>
+
+    <p style="margin-top:18px">Without ownCloud, the SD card is where your work lives. With it, your X16 joins your other computers:
+      write a letter on the X16 and finish it in Word on your laptop, update a budget on the PC and open it on the X16,
+      add a dentist appointment on your phone and see it in X16 Calendar.</p>
+
+    <div class="flow" role="img" aria-label="The X16 connects over a Wi-Fi network card to a sync hub on your network, which talks to your ownCloud server, which your laptop and phone also use">
+      <div class="node"><b>Commander X16</b>Write, Sheets,<br>Files, Calendar</div>
+      <div class="arrow">&harr;<small>Wi-Fi card</small></div>
+      <div class="node opt"><b>Sync hub</b>a small container<br>on your network</div>
+      <div class="arrow">&harr;<small>HTTPS</small></div>
+      <div class="node opt"><b>ownCloud</b>Documents folder<br>and X16 calendar</div>
+      <div class="arrow">&harr;</div>
+      <div class="node"><b>Everything else</b>laptop, phone,<br>tablet, web</div>
+    </div>
+
+    <div class="two">
+      <div class="panel">
+        <h3>What ownCloud adds</h3>
+        <ul class="feat">
+          <li><b>Write</b> opens and saves RTF, TXT and <b>Word (.docx)</b> in ownCloud's Documents folder</li>
+          <li><b>Sheets</b> opens any XLSX or CSV, and saves XLSX or CSV</li>
+          <li><b>Files</b> copies and moves files and folders between the SD card and ownCloud</li>
+          <li><b>Calendar</b> syncs both ways with an ownCloud calendar your phone can use</li>
+          <li><b>Nothing is overwritten silently</b>: if a file changed elsewhere you choose Overwrite, New name or Cancel</li>
+          <li>The hub sets the X16's clock at every sync</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>What you need for it</h3>
+        <ol>
+          <li>The <b style="color:var(--yellow);font-weight:normal">TexElec X16 Serial &amp; ESP32 Network Card</b> (Zimodem firmware) on your Wi-Fi</li>
+          <li>An ownCloud server you can reach over HTTPS</li>
+          <li>A Linux machine (a Raspberry Pi is fine) running the sync hub container, about 20 minutes with Docker</li>
+          <li>The <code>X16LINK.KEY</code> the hub makes for your X16, copied to the SD card</li>
+        </ol>
+        <p style="margin:10px 0 0" class="more">Step by step: <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/docs/hub.md">the sync hub guide</a>.
+          Each X16 has its own key, and the X16 and the hub prove they know it before anything else happens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GET IT ===================== -->
+  <section id="get" aria-labelledby="h-get">
+    <div class="pane-title yellow"><h2 id="h-get">Get it running</h2></div>
+    <div class="two">
+      <div class="panel">
+        <h3>On the X16</h3>
+        <ol>
+          <li>Download the <a href="https://github.com/hermeslohin/cx16officesuite/releases/latest">latest release</a>
+            (or the <a href="https://github.com/hermeslohin/cx16officesuite/tree/main/sdcard">sdcard folder</a>).</li>
+          <li>Copy everything to the root of the X16's SD card.</li>
+          <li><code>LOAD "X16WP.PRG"</code> and <code>RUN</code>, or <code>X16SHEETS.PRG</code>, <code>X16FM.PRG</code>, <code>CALENDAR.PRG</code>.</li>
+        </ol>
+        <p style="margin:10px 0 0" class="more">You need a mouse and 512 KB of RAM.</p>
+      </div>
+      <div class="panel">
+        <h3>In the emulator</h3>
+        <p style="margin:0 0 8px">The official <a href="https://github.com/X16Community/x16-emulator">x16emu</a> runs every app:</p>
+        <p style="margin:0 0 8px"><code class="cmd">x16emu -scale 2 -fsroot sdcard -prg sdcard/X16WP.PRG -run</code></p>
+        <p style="margin:0" class="more">Add <code>-rtc</code> so the calendar knows today's date. The screenshots on this page were taken in the emulator.</p>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table class="list">
+        <thead><tr><th>Files on the SD card</th><th>Needed by</th></tr></thead>
+        <tbody>
+          <tr><td>X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN</td><td>X16 Write (ownCloud, Save As folder browser, tables)</td></tr>
+          <tr><td>X16SHEETS.PRG, SHUI.BIN, SHOPS.BIN, SHFILE.BIN, SHXW.BIN, SHXR.BIN, SHSA.BIN</td><td>X16 Sheets (all required)</td></tr>
+          <tr><td>X16FM.PRG</td><td>X16 Files</td></tr>
+          <tr><td>CALENDAR.PRG</td><td>X16 Calendar</td></tr>
+          <tr><td>X16LINK.BIN, X16DOCS.BIN</td><td>The ownCloud link, shared by all four apps (only if you use ownCloud)</td></tr>
+          <tr><td>X16LINK.KEY</td><td>Yours, made by the hub for this X16 (only if you use ownCloud). Keep it safe like a house key.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="more" style="margin-top:18px">Source code: <a href="https://github.com/hermeslohin/commanderx16wp">X16 Write</a>,
+      <a href="https://github.com/hermeslohin/commanderx16sheets">X16 Sheets</a>,
+      <a href="https://github.com/hermeslohin/commanderx16fm">X16 Files</a>,
+      <a href="https://github.com/hermeslohin/commanderx16calendar">X16 Calendar</a> and the
+      <a href="https://github.com/hermeslohin/x16-office-hub">sync hub</a>. Built with Prog8 and 64tass.</p>
+  </section>
+
+</main>
+
+<footer class="status">
+  <img class="px" src="img/quill.png" alt="Quill, the X16 Office mascot" width="15" height="16">
+  <span>Ready. Click a pill at the top to jump to an app.</span>
+  <span class="right">X16 Office Suite</span>
+</footer>
+
+</body>
+</html>
