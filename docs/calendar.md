@@ -3,6 +3,7 @@
 `LOAD "CALENDAR.PRG"` and `RUN`. Needs a mouse. Events are saved to `CALENDAR.DAT` (next to the
 program) after every change. For Sync with ownCloud also `X16LINK.BIN` and your `X16LINK.KEY`.
 Set the X16's clock so **Today** knows the date (the hub also sets it at every Sync).
+With `X16THEME1.BIN` ... `X16THEME6.BIN` on the card, click Quill (bottom left) for the next theme.
 
 ## The screen
 

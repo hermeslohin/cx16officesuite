@@ -2,7 +2,8 @@
 
 `LOAD "X16FM.PRG"` and `RUN`. Needs a mouse. Files: `X16FM.PRG`; for the ownCloud pane also
 `X16LINK.BIN`, `X16DOCS.BIN` and your `X16LINK.KEY`. Without them the SD card side still works and
-the ownCloud pane says why it is unavailable.
+the ownCloud pane says why it is unavailable. With `X16THEME1.BIN` ... `X16THEME6.BIN` on the card, click
+Quill (bottom left) for the next theme.
 
 **Left pane: the X16's SD card. Right pane: ownCloud `Documents`.** Copy and move files and whole
 folders between the two or inside one of them; rename, delete, make folders.

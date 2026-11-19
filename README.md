@@ -53,10 +53,11 @@ X16Link libraries and the key file.
 
 | File | Needed by |
 |---|---|
-| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN`, `X16WPPI.BIN`, `X16WPPL.BIN`, `X16WPHC.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables, BMX pictures in 256 colours and tool tips) |
-| `X16SHEETS.PRG`, `SHUI.BIN`, `SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN` | X16 Sheets (all required) |
+| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN`, `X16WPPI.BIN`, `X16WPPL.BIN`, `X16WPHC.BIN`, `X16WPTH.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables, BMX pictures in 256 colours, tool tips and the theme loader) |
+| `X16SHEETS.PRG`, `SHUI.BIN`, `SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN`, `SHTH.BIN` | X16 Sheets (all required except `SHTH.BIN`, the theme loader) |
 | `X16FM.PRG` | X16 Files |
 | `CALENDAR.PRG` | X16 Calendar (keeps its events in `CALENDAR.DAT`, sync state in `CALSYNC.DAT`) |
+| `X16THEME1.BIN` ... `X16THEME6.BIN` | the six themes, shared by all four apps (optional: without them the apps use Sunset Arcade). The apps keep your choice in `X16THEME.CFG`. |
 | `X16LINK.BIN`, `X16DOCS.BIN` | the ownCloud link, shared by all four apps (the calendar needs only `X16LINK.BIN`) |
 | `X16LINK.KEY` | **yours**, made by the hub for this X16 (never in this repository). Treat the SD card like a house key: anyone with this file can act as your X16 towards the hub. |
 
@@ -64,9 +65,12 @@ The files' SHA-256 checksums are in [SHA256SUMS](SHA256SUMS).
 
 ## Common to all the apps
 
-* **Same look**, the **Sunset Arcade** theme: a striped title bar with the close box at the top
-  right, a toolbar of coloured buttons (hover for a tool tip in the status bar), cream pages and
-  lists on a dark violet desk, dialogs with mouse buttons and keyboard shortcuts (Enter = OK,
+* **Same look**, in six themes: **Sunset Arcade**, **Crayon Desk**, **Comic Book**, **Beach Hut**,
+  **Chalkboard** and **Winter Cabin**. **Click Quill** (bottom left) to switch to the next one; the
+  choice is saved and shared, so all four apps use the theme you picked last. Each theme is a small
+  file on the SD card, and only the one in use is loaded. Every theme has a striped title bar with the close box at the top
+  right, a toolbar of coloured buttons (hover for a tool tip in the status bar), pages and
+  lists on a patterned desk, dialogs with mouse buttons and keyboard shortcuts (Enter = OK,
   Esc = Cancel). **Quill**, a little pencil at the left end of the status bar, blinks now and then
   and hops when something went well (a save, a copy, a sync).
 * **Your documents keep their colours.** The theme only changes how the 16 colours look on the

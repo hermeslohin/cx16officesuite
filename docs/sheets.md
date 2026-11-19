@@ -1,7 +1,7 @@
 # X16 Sheets - spreadsheet
 
 `LOAD "X16SHEETS.PRG"` and `RUN`. Needs a mouse. Files (all required): `X16SHEETS.PRG`, `SHUI.BIN`,
-`SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN`; for ownCloud also `X16LINK.BIN`,
+`SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN` (+ `SHTH.BIN` and `X16THEME1.BIN` ... `X16THEME6.BIN` for themes: click Quill for the next one); for ownCloud also `X16LINK.BIN`,
 `X16DOCS.BIN` (+ your `X16LINK.KEY`).
 
 ## The screen

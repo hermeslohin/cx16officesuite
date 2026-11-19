@@ -2,7 +2,7 @@
 
 `LOAD "X16WP.PRG"` and `RUN`. Needs a mouse. Files: `X16WP.PRG`; for ownCloud and the Save As
 folder browser also `X16WPCL.BIN`, `X16WPSA.BIN`, `X16LINK.BIN`, `X16DOCS.BIN` (+ your `X16LINK.KEY`);
-for tables `X16WPTB.BIN`; for pictures and tool tips `X16WPPI.BIN` and `X16WPPL.BIN` (+ `X16WPHC.BIN` for 256 colours). Without the `.BIN`
+for tables `X16WPTB.BIN`; for pictures and tool tips `X16WPPI.BIN` and `X16WPPL.BIN` (+ `X16WPHC.BIN` for 256 colours); for themes `X16WPTH.BIN` and `X16THEME1.BIN` ... `X16THEME6.BIN` (click Quill, bottom left, for the next theme). Without the `.BIN`
 files X16 Write is a plain SD card word processor.
 
 ## The screen
