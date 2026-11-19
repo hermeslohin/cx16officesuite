@@ -2,7 +2,7 @@
 
 `LOAD "X16WP.PRG"` and `RUN`. Needs a mouse. Files: `X16WP.PRG`; for ownCloud and the Save As
 folder browser also `X16WPCL.BIN`, `X16WPSA.BIN`, `X16LINK.BIN`, `X16DOCS.BIN` (+ your `X16LINK.KEY`);
-for tables `X16WPTB.BIN`; for pictures and tool tips `X16WPPI.BIN` and `X16WPPL.BIN`. Without the `.BIN`
+for tables `X16WPTB.BIN`; for pictures and tool tips `X16WPPI.BIN` and `X16WPPL.BIN` (+ `X16WPHC.BIN` for 256 colours). Without the `.BIN`
 files X16 Write is a plain SD card word processor.
 
 ## The screen
@@ -43,11 +43,13 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
 ## Pictures (BMX)
 
 * **Picture** button (toolbar 1, after Table): **1** = a BMX file from the SD card (type its name),
-  **2** = from ownCloud (the `Documents` list; only `.bmx` files can be chosen). BMX is the
+  **2** = from ownCloud (the `Documents` list: `.bmx` files, and `.png`, `.jpg`, `.gif` and `.bmp`
+  files, which the hub turns into a BMX picture of at most 320 x 240 in 256 colours, turned the right
+  way up for phone photos). BMX is the
   Commander X16's bitmap format: version 1, uncompressed, 1, 2, 4 or 8 bits per pixel, up to 640 x 1024.
 * The picture goes on the current line if it is empty, otherwise after the paragraph (or after the
   table or picture the cursor is in); there is always a line after it to go on writing.
-* It is shown centred in the 16 Sunset colours and scaled to fit: a 320 x 240 picture takes 15 lines.
+* It is shown centred in **256 colours** (with `X16WPHC.BIN`; without it in the 16 Sunset colours) and scaled to fit: a 320 x 240 picture takes 15 lines.
   A picture never starts on a page it doesn't fit on.
 * The cursor can sit on a picture: **Backspace** or **Delete** removes it; **Enter**, typing or
   **Paste** go to a new line after it. Text is never merged into a picture, and a selection that
