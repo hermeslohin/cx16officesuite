@@ -26,28 +26,90 @@
     --violet: #9988ff;
     --ink: #221133;
     --cell: 8px;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
-  body {
-    margin: 0;
-    background-color: var(--desk);
-    /* the starry desk */
-    background-image:
+    /* the page around the windows: desk, text on it, title bar */
+    --page: #221133; --text: #ffeedd; --head: #ffdd44; --head2: #ff4488;
+    --link: #ffdd44; --linkhov: #ff9933;
+    --t1: #ff4488; --t2: #ff9933; --chipbg: #221133; --chiptx: #ffeedd; --brand: #ffdd44;
+    --shadow: var(--shadow);
+    --deskimg:
       radial-gradient(1.5px 1.5px at 23px 31px, #665599 99%, transparent),
       radial-gradient(1.5px 1.5px at 141px 87px, #9988ff 99%, transparent),
       radial-gradient(1px 1px at 87px 150px, #665599 99%, transparent),
       radial-gradient(2px 2px at 199px 201px, #665599 99%, transparent),
       radial-gradient(1px 1px at 61px 233px, #9988ff 99%, transparent);
-    background-size: 240px 260px;
-    color: var(--cream);
+    --desksize: 240px 260px;
+  }
+  /* the other five themes, with the colours of X16THEME2..6.BIN */
+  :root[data-theme="2"] { /* Crayon Desk: kraft paper with wood grain */
+    --desk: #222233; --bar: #553322; --face: #886644; --lav: #eeddbb; --cream: #ffffee; --pink: #ee5544;
+    --orange: #ff9944; --yellow: #ffcc33; --cyan: #44cccc; --blue: #2277cc; --green: #44aa55; --violet: #88ccff; --ink: #222233;
+    --page: #cc9966; --text: #222233; --head: #553322; --head2: #ffffee; --link: #553322; --linkhov: #ee5544;
+    --t1: #886644; --t2: #886644; --chipbg: #ee5544; --chiptx: #ffffee; --brand: #ffffee; --shadow: #553322;
+    --deskimg:
+      repeating-linear-gradient(0deg, transparent 0 21px, #bb8855 21px 23px, transparent 23px 37px, #ddaa77 37px 38px),
+      radial-gradient(3px 2px at 60px 40px, #886644 99%, transparent);
+    --desksize: auto, 180px 120px;
+  }
+  :root[data-theme="3"] { /* Comic Book: pale yellow with halftone dots */
+    --desk: #111111; --bar: #111111; --face: #2255dd; --lav: #99ddff; --cream: #ffffff; --pink: #ee2222;
+    --orange: #ff8822; --yellow: #ffee22; --cyan: #22bbee; --blue: #2255dd; --green: #33aa33; --violet: #99ddff; --ink: #111111;
+    --page: #ffee99; --text: #111111; --head: #ee2222; --head2: #2255dd; --link: #2255dd; --linkhov: #ee2222;
+    --t1: #ee2222; --t2: #ee2222; --chipbg: #111111; --chiptx: #ffffff; --brand: #ffee22; --shadow: #111111;
+    --deskimg: radial-gradient(circle, #ff99aa 0 2px, transparent 2.5px);
+    --desksize: 12px 12px;
+  }
+  :root[data-theme="4"] { /* Beach Hut: sand with pebbles and shells */
+    --desk: #223344; --bar: #2288cc; --face: #445577; --lav: #aaeeff; --cream: #ffffee; --pink: #ee5555;
+    --orange: #ffaa66; --yellow: #ffdd44; --cyan: #22cccc; --blue: #2277bb; --green: #33aa66; --violet: #aaeeff; --ink: #223344;
+    --page: #eeddaa; --text: #223344; --head: #2277bb; --head2: #ee5555; --link: #2277bb; --linkhov: #ee5555;
+    --t1: #ffffee; --t2: #22cccc; --chipbg: #223344; --chiptx: #ffffee; --brand: #ffdd44; --shadow: #aa8866;
+    --deskimg:
+      radial-gradient(2.5px 2px at 30px 40px, #999988 99%, transparent),
+      radial-gradient(3px 3px at 120px 90px, #ff99aa 99%, transparent),
+      radial-gradient(2px 1.5px at 170px 20px, #aa8866 99%, transparent),
+      radial-gradient(2px 2px at 80px 150px, #999988 99%, transparent);
+    --desksize: 200px 180px;
+  }
+  :root[data-theme="5"] { /* Chalkboard: green board with chalk dust */
+    --desk: #222222; --bar: #996644; --face: #338844; --lav: #ddccaa; --cream: #ffffff; --pink: #dd4444;
+    --orange: #ee8833; --yellow: #ffdd55; --cyan: #33bbbb; --blue: #3366cc; --green: #338844; --violet: #99ccee; --ink: #222222;
+    --page: #224433; --text: #ffffff; --head: #ffdd55; --head2: #ff9999; --link: #ffdd55; --linkhov: #ee8833;
+    --t1: #996644; --t2: #996644; --chipbg: #222222; --chiptx: #ddccaa; --brand: #ffffff; --shadow: #111111;
+    --deskimg:
+      radial-gradient(1.5px 1.5px at 40px 30px, #88aa99 99%, transparent),
+      radial-gradient(1px 1px at 150px 100px, #ffffff 99%, transparent),
+      radial-gradient(2px 1px at 90px 190px, #88aa99 99%, transparent),
+      radial-gradient(1px 1px at 210px 160px, #99ccee 99%, transparent);
+    --desksize: 240px 220px;
+  }
+  :root[data-theme="6"] { /* Winter Cabin: wooden planks and snowflakes */
+    --desk: #332211; --bar: #335544; --face: #aa6633; --lav: #eeddcc; --cream: #ffffee; --pink: #cc3333;
+    --orange: #ee8844; --yellow: #ffcc55; --cyan: #44aaaa; --blue: #4466aa; --green: #336644; --violet: #aaddff; --ink: #332211;
+    --page: #ddaa66; --text: #332211; --head: #335544; --head2: #cc3333; --link: #335544; --linkhov: #cc3333;
+    --t1: #cc3333; --t2: #335544; --chipbg: #eeddcc; --chiptx: #332211; --brand: #cc3333; --shadow: #332211;
+    --deskimg:
+      radial-gradient(2px 2px at 70px 50px, #ffffee 99%, transparent),
+      repeating-linear-gradient(0deg, transparent 0 46px, #aa6633 46px 48px);
+    --desksize: 160px 144px, auto;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  body {
+    margin: 0;
+    background-color: var(--page);
+    /* the desk pattern of the theme */
+    background-image: var(--deskimg);
+    background-size: var(--desksize);
+    color: var(--text);
     font-family: "VT323", ui-monospace, "Courier New", monospace;
     font-size: 22px;
     line-height: 1.25;
     -webkit-font-smoothing: none;
   }
-  a { color: var(--yellow); }
-  a:hover { color: var(--orange); }
+  a { color: var(--link); }
+  a:hover { color: var(--linkhov); }
+  .panel a, footer.status a { color: var(--yellow); }
+  .notice a, .card a { color: var(--blue); }
   img.px { image-rendering: pixelated; image-rendering: crisp-edges; }
   code.cmd { display: block; padding: 4px 8px; overflow-x: auto; white-space: nowrap; }
   code { font-family: inherit; background: var(--bar); color: var(--yellow); padding: 0 4px; }
@@ -58,12 +120,12 @@
     display: flex; align-items: center; gap: 10px;
     min-height: 44px; padding: 0 10px;
     background:
-      linear-gradient(135deg, transparent 50%, var(--orange) 50%) 0 100% / 8px 8px repeat-x,
-      linear-gradient(225deg, transparent 50%, var(--orange) 50%) 4px 100% / 8px 8px repeat-x,
-      linear-gradient(var(--pink) 0 55%, var(--orange) 55% 100%);
+      linear-gradient(135deg, transparent 50%, var(--t2) 50%) 0 100% / 8px 8px repeat-x,
+      linear-gradient(225deg, transparent 50%, var(--t2) 50%) 4px 100% / 8px 8px repeat-x,
+      linear-gradient(var(--t1) 0 55%, var(--t2) 55% 100%);
   }
-  .chip { display: inline-block; background: var(--desk); color: var(--cream); padding: 0 10px; line-height: 30px; white-space: nowrap; }
-  .chip.brand { color: var(--yellow); letter-spacing: 1px; }
+  .chip { display: inline-block; background: var(--chipbg); color: var(--chiptx); padding: 0 10px; line-height: 30px; white-space: nowrap; }
+  .chip.brand { color: var(--brand); letter-spacing: 1px; }
   .titlebar nav { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
   .titlebar nav a { text-decoration: none; box-shadow: 0 0 0 2px var(--desk); }
   .close {
@@ -88,22 +150,22 @@
 
   /* ---------- hero ---------- */
   .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 32px; align-items: center; padding: 48px 0 24px; }
-  .hero h1 { font-size: clamp(48px, 8vw, 84px); line-height: .9; margin: 0 0 12px; color: var(--yellow); font-weight: normal; }
-  .hero h1 span { color: var(--pink); }
+  .hero h1 { font-size: clamp(48px, 8vw, 84px); line-height: .9; margin: 0 0 12px; color: var(--head); font-weight: normal; }
+  .hero h1 span { color: var(--head2); }
   .hero p.lead { font-size: 27px; margin: 0 0 18px; }
   .hero .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
   .apps-row { display: flex; flex-wrap: wrap; gap: 8px; }
   .apps-row a { text-decoration: none; }
 
   /* ---------- an X16 "window" around a screenshot ---------- */
-  .window { background: var(--bar); border: 4px solid var(--bar); box-shadow: 8px 8px 0 #110822; }
+  .window { background: var(--bar); border: 4px solid var(--bar); box-shadow: 8px 8px 0 var(--shadow); }
   .window .wbar {
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     height: 28px; padding: 0 6px; font-size: 20px;
     background:
-      linear-gradient(135deg, transparent 50%, var(--orange) 50%) 0 100% / 6px 6px repeat-x,
-      linear-gradient(225deg, transparent 50%, var(--orange) 50%) 3px 100% / 6px 6px repeat-x,
-      linear-gradient(var(--pink) 0 55%, var(--orange) 55% 100%);
+      linear-gradient(135deg, transparent 50%, var(--t2) 50%) 0 100% / 6px 6px repeat-x,
+      linear-gradient(225deg, transparent 50%, var(--t2) 50%) 3px 100% / 6px 6px repeat-x,
+      linear-gradient(var(--t1) 0 55%, var(--t2) 55% 100%);
   }
   .window .wbar .chip { padding: 0 8px; }
   .window img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
@@ -113,7 +175,7 @@
   .notice {
     display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start;
     background: var(--cream); color: var(--ink); padding: 18px 22px; margin: 24px 0 8px;
-    border-left: 12px solid var(--yellow); box-shadow: 8px 8px 0 #110822;
+    border-left: 12px solid var(--yellow); box-shadow: 8px 8px 0 var(--shadow);
   }
   .notice img { width: 60px; height: auto; }
   .notice h2 { margin: 0 0 6px; font-size: 32px; font-weight: normal; color: var(--pink); }
@@ -137,38 +199,39 @@
   /* ---------- app sections ---------- */
   .app { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 24px 0 0; align-items: start; }
   .app.flip .shot { order: 2; }
-  .app p.tagline { font-size: 26px; margin: 0 0 12px; color: var(--yellow); }
+  .app p.tagline { font-size: 26px; margin: 0 0 12px; color: var(--head); }
   ul.feat { list-style: none; padding: 0; margin: 0 0 14px; }
   ul.feat li { position: relative; padding-left: 26px; margin-bottom: 6px; }
   ul.feat li::before {
     content: ""; position: absolute; left: 4px; top: 8px; width: 10px; height: 10px; background: var(--pink);
   }
-  ul.feat li b { color: var(--yellow); font-weight: normal; }
+  ul.feat li b { color: var(--head); font-weight: normal; }
+  .panel ul.feat li b { color: var(--yellow); }
   .formats { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
   .tag { background: var(--cream); color: var(--ink); padding: 0 8px; font-size: 20px; }
   .tag.cloud { background: var(--cyan); }
   .more { font-size: 20px; }
 
-  .subhead { display: flex; align-items: center; gap: 10px; margin: 30px 0 0; padding: 4px 12px; background: var(--bar); }
+  .subhead { color: var(--cream); display: flex; align-items: center; gap: 10px; margin: 30px 0 0; padding: 4px 12px; background: var(--bar); }
   .subhead h3 { margin: 0; font-size: 28px; font-weight: normal; color: var(--yellow); }
   .tag.new { background: var(--pink); color: var(--desk); }
 
   /* ---------- cards (common features) ---------- */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-top: 18px; }
-  .card { background: var(--cream); color: var(--ink); padding: 14px 16px; box-shadow: 6px 6px 0 #110822; }
+  .card { background: var(--cream); color: var(--ink); padding: 14px 16px; box-shadow: 6px 6px 0 var(--shadow); }
   .card h3 { margin: 0 0 6px; font-size: 26px; font-weight: normal; color: var(--pink); }
   .card p { margin: 0; }
 
   /* ---------- the ownCloud diagram ---------- */
   .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 10px; margin: 22px 0 10px; }
-  .node { background: var(--cream); color: var(--ink); padding: 10px 12px; text-align: center; box-shadow: 6px 6px 0 #110822; min-height: 104px; display: flex; flex-direction: column; justify-content: center; }
+  .node { background: var(--cream); color: var(--ink); padding: 10px 12px; text-align: center; box-shadow: 6px 6px 0 var(--shadow); min-height: 104px; display: flex; flex-direction: column; justify-content: center; }
   .node b { display: block; font-weight: normal; color: var(--pink); font-size: 25px; }
   .node.opt { outline: 3px dashed var(--cyan); outline-offset: 4px; }
-  .arrow { color: var(--yellow); font-size: 30px; text-align: center; }
-  .arrow small { display: block; font-size: 17px; color: var(--lav); }
+  .arrow { color: var(--head); font-size: 30px; text-align: center; }
+  .arrow small { display: block; font-size: 17px; color: var(--text); }
   .badge { display: inline-block; background: var(--cyan); color: var(--desk); padding: 0 8px; font-size: 19px; vertical-align: middle; }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-  .panel { background: var(--bar); padding: 14px 18px; }
+  .panel { color: var(--cream); background: var(--bar); padding: 14px 18px; }
   .panel h3 { margin: 0 0 8px; font-size: 27px; font-weight: normal; color: var(--yellow); }
   .panel ol { margin: 0; padding-left: 28px; }
   .panel li { margin-bottom: 6px; }
@@ -178,18 +241,38 @@
   table.list th { background: var(--yellow); text-align: left; padding: 2px 10px; font-weight: normal; }
   table.list td { padding: 2px 10px; border-top: 1px solid var(--lav); vertical-align: top; }
   table.list td:first-child { color: var(--blue); }
-  .tablewrap { overflow-x: auto; box-shadow: 6px 6px 0 #110822; margin-top: 18px; }
+  .tablewrap { overflow-x: auto; box-shadow: 6px 6px 0 var(--shadow); margin-top: 18px; }
 
   /* ---------- status bar footer with Quill ---------- */
   footer.status {
     position: sticky; bottom: 0; z-index: 10;
     display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    background: var(--desk); border-top: 2px solid var(--bar); padding: 4px 12px; font-size: 20px;
+    background: var(--desk); color: var(--cream); border-top: 2px solid var(--bar); padding: 4px 12px; font-size: 20px;
   }
-  footer.status img { width: 22px; animation: hop 6s steps(1) infinite; }
+  footer.status .quill img { width: 32px; height: 16px; display: block; animation: hop 6s steps(1) infinite; }
+  .quill { background: none; border: 0; padding: 4px 2px; cursor: pointer; line-height: 0; }
+  .quill.hop img { animation: jump .5s steps(2) 2; }
+  @keyframes jump { 50% { transform: translateY(-6px); } }
+
+  /* ---------- theme picker: Quill + one pill per theme ---------- */
+  .themebar {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+    background: var(--desk); color: var(--cream); padding: 6px 12px; font-size: 20px;
+    border-bottom: 2px solid var(--bar);
+  }
+  .themebar .quill img { width: 48px; height: 24px; }
+  .themebar .label { color: var(--yellow); margin-right: 4px; }
+  .tpill {
+    display: inline-flex; align-items: center; gap: 6px; font: inherit; font-size: 20px; cursor: pointer;
+    border: 0; border-radius: 999px; padding: 1px 12px 1px 8px; background: var(--tb); color: var(--tf);
+    box-shadow: inset 0 0 0 2px var(--tf);
+  }
+  .tpill img { width: 24px; height: 12px; }
+  .tpill[aria-pressed="true"] { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .tpill:hover { filter: brightness(1.1); }
   footer.status .right { margin-left: auto; color: var(--yellow); }
   @keyframes hop { 0%, 90%, 100% { transform: none; } 92%, 96% { transform: translateY(-5px); } }
-  @media (prefers-reduced-motion: reduce) { footer.status img { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { footer.status .quill img, .quill.hop img { animation: none; } }
 
   @media (max-width: 860px) {
     .hero, .app, .two { grid-template-columns: 1fr; }
@@ -225,6 +308,17 @@
   </nav>
   <a class="close" href="https://github.com/hermeslohin/cx16officesuite" title="Repository on GitHub">X</a>
 </header>
+
+<div class="themebar" role="group" aria-label="Theme">
+  <button class="quill" type="button" id="quill-top" title="Click Quill: next theme" aria-label="Next theme"><img class="px" src="img/quill-1.png" alt="" width="16" height="8"></button>
+  <span class="label">Theme:</span>
+  <button class="tpill" type="button" data-t="1" style="--tb:#ff4488;--tf:#221133"><img class="px" src="img/quill-1.png" alt="" width="16" height="8">Sunset Arcade</button>
+  <button class="tpill" type="button" data-t="2" style="--tb:#cc9966;--tf:#222233"><img class="px" src="img/quill-2.png" alt="" width="16" height="8">Crayon Desk</button>
+  <button class="tpill" type="button" data-t="3" style="--tb:#ffee99;--tf:#ee2222"><img class="px" src="img/quill-3.png" alt="" width="16" height="8">Comic Book</button>
+  <button class="tpill" type="button" data-t="4" style="--tb:#aaeeff;--tf:#2277bb"><img class="px" src="img/quill-4.png" alt="" width="16" height="8">Beach Hut</button>
+  <button class="tpill" type="button" data-t="5" style="--tb:#224433;--tf:#ffffff"><img class="px" src="img/quill-5.png" alt="" width="16" height="8">Chalkboard</button>
+  <button class="tpill" type="button" data-t="6" style="--tb:#cc3333;--tf:#eeddcc"><img class="px" src="img/quill-6.png" alt="" width="16" height="8">Winter Cabin</button>
+</div>
 
 <main>
 
@@ -545,10 +639,42 @@
 </main>
 
 <footer class="status">
-  <img class="px" src="img/quill.png" alt="Quill, the X16 Office mascot" width="15" height="16">
-  <span>Ready. Click a pill at the top to jump to an app.</span>
+  <button class="quill" type="button" id="quill-foot" title="Click Quill: next theme" aria-label="Quill, the X16 Office mascot: next theme"><img class="px" src="img/quill-1.png" alt="" width="16" height="8"></button>
+  <span id="status">Ready. Click a pill at the top to jump to an app, or Quill for the next theme.</span>
   <span class="right">X16 Office Suite · <a href="https://github.com/hermeslohin/cx16officesuite/blob/main/LICENSE" style="color:inherit">GPLv3</a></span>
 </footer>
+
+<script>
+  // Themes, like in the apps: click Quill for the next one, or pick one by name.
+  (function () {
+    var names = ["Sunset Arcade", "Crayon Desk", "Comic Book", "Beach Hut", "Chalkboard", "Winter Cabin"];
+    var root = document.documentElement, cur = 1;
+    function apply(n, cheer) {
+      cur = n;
+      if (n === 1) root.removeAttribute("data-theme"); else root.setAttribute("data-theme", String(n));
+      document.querySelectorAll(".quill img").forEach(function (im) { im.src = "img/quill-" + n + ".png"; });
+      document.querySelectorAll(".tpill").forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-t") === String(n) ? "true" : "false");
+      });
+      try { localStorage.setItem("x16theme", String(n)); } catch (e) {}
+      if (cheer) {
+        document.getElementById("status").textContent = "Theme: " + names[n - 1];
+        document.querySelectorAll(".quill").forEach(function (q) {
+          q.classList.remove("hop"); void q.offsetWidth; q.classList.add("hop");
+        });
+      }
+    }
+    var saved = 1;
+    try { saved = parseInt(localStorage.getItem("x16theme"), 10) || 1; } catch (e) {}
+    apply(saved >= 1 && saved <= 6 ? saved : 1, false);
+    document.querySelectorAll(".quill").forEach(function (q) {
+      q.addEventListener("click", function () { apply(cur % 6 + 1, true); });
+    });
+    document.querySelectorAll(".tpill").forEach(function (b) {
+      b.addEventListener("click", function () { apply(parseInt(b.getAttribute("data-t"), 10), true); });
+    });
+  })();
+</script>
 
 </body>
 </html>
