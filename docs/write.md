@@ -25,9 +25,12 @@ a scroll bar, and the status bar (tool tips when you hover over an icon).
   bar or wheel to scroll.
 * Keys: typing, Enter, Backspace, Delete, arrows, Home, End, PgUp, PgDn, Tab (4 spaces).
 * Formatting buttons apply to the selection, or to what you type next.
-* A page is 64 columns x 54 lines (prints as 12 pt, 10 characters per inch, 1" margins);
-  up to 16 pages with the standard 512 KB of RAM, about 53 pages with 1 MB and 64 pages with 1.5 or
-  2 MB (with more RAM there is also room for more pictures). Clipboard: 2700 characters.
+* A page is 64 columns x 54 lines (prints as 12 pt, 10 characters per inch, 1" margins).
+  A document can be up to **8192 lines (about 150 pages) on every X16**, even with the standard
+  512 KB: only the part you are working on is in RAM, the rest waits in swap files in the folder
+  `X16WPSWP` on the SD card (`X16WPVM.BIN`; up to 2 MB, deleted when X16 Write quits). More RAM
+  makes long documents faster and leaves room for more pictures. Without `X16WPVM.BIN` a document
+  is limited to what fits in RAM: 13 pages with 512 KB, 61 with 2 MB. Clipboard: 2700 characters.
 
 ## Tables
 

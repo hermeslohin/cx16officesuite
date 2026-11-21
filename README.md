@@ -53,7 +53,7 @@ X16Link libraries and the key file.
 
 | File | Needed by |
 |---|---|
-| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN`, `X16WPPI.BIN`, `X16WPPL.BIN`, `X16WPHC.BIN`, `X16WPTH.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables, BMX pictures in 256 colours, tool tips and the theme loader) |
+| `X16WP.PRG`, `X16WPCL.BIN`, `X16WPSA.BIN`, `X16WPTB.BIN`, `X16WPPI.BIN`, `X16WPPL.BIN`, `X16WPHC.BIN`, `X16WPTH.BIN`, `X16WPVM.BIN` | X16 Write (the `.BIN` files: ownCloud, the Save As folder browser, tables, BMX pictures in 256 colours, tool tips, the theme loader and long documents in swap files on the SD card) |
 | `X16SHEETS.PRG`, `SHUI.BIN`, `SHOPS.BIN`, `SHFILE.BIN`, `SHXW.BIN`, `SHXR.BIN`, `SHSA.BIN`, `SHTH.BIN` | X16 Sheets (all required except `SHTH.BIN`, the theme loader) |
 | `X16FM.PRG` | X16 Files |
 | `CALENDAR.PRG` | X16 Calendar (keeps its events in `CALENDAR.DAT`, sync state in `CALSYNC.DAT`) |

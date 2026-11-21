@@ -1,12 +1,12 @@
 # Versions
 
-The files in `sdcard/` were built on 2026-11-19 from fresh clones of these commits (six themes shared by all four apps, picked by clicking Quill; X16 Write
+The files in `sdcard/` were built on 2026-11-21 from fresh clones of these commits (six themes shared by all four apps, picked by clicking Quill; X16 Write
 with tables, 12/18/24/36 pt, BMX pictures and up to 64 pages with more RAM, and the hub that converts them to and from DOCX; X16 Write and
-X16 Sheets without the flashing title bar, toolbars and status bar; X16 Write scrolls through every page of long documents; X16 Write shows pictures in 256 colours and inserts PNG, JPEG, GIF and BMP files from ownCloud):
+X16 Sheets without the flashing title bar, toolbars and status bar; X16 Write scrolls through every page of long documents; X16 Write shows pictures in 256 colours and inserts PNG, JPEG, GIF and BMP files from ownCloud; X16 Write keeps long documents in swap files on the SD card, up to 8192 lines on every X16):
 
 | Component | Repository | Commit | Files |
 |---|---|---|---|
-| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`4827455`](https://github.com/hermeslohin/commanderx16wp/commit/4827455438f2dbce98115aff4acf07d6d0753e09) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN, X16WPPI.BIN, X16WPPL.BIN, X16WPHC.BIN, X16WPTH.BIN, X16THEME1-6.BIN |
+| X16 Write | [hermeslohin/commanderx16wp](https://github.com/hermeslohin/commanderx16wp) | [`a4ca809`](https://github.com/hermeslohin/commanderx16wp/commit/a4ca809993c892ae56c512a20b8ff74ad14c626c) | X16WP.PRG, X16WPCL.BIN, X16WPSA.BIN, X16WPTB.BIN, X16WPPI.BIN, X16WPPL.BIN, X16WPHC.BIN, X16WPTH.BIN, X16WPVM.BIN, X16THEME1-6.BIN |
 | X16 Sheets | [hermeslohin/commanderx16sheets](https://github.com/hermeslohin/commanderx16sheets) | [`9bc1a19`](https://github.com/hermeslohin/commanderx16sheets/commit/9bc1a19fc03dc87f818164da82d4f4870768d0a3) | X16SHEETS.PRG, SHUI/SHOPS/SHFILE/SHXW/SHXR/SHSA/SHTH.BIN |
 | X16 Files | [hermeslohin/commanderx16fm](https://github.com/hermeslohin/commanderx16fm) | [`27ef7f4`](https://github.com/hermeslohin/commanderx16fm/commit/27ef7f4756e6c69538d9f148190b31ca8298c7ea) | X16FM.PRG |
 | X16 Calendar | [hermeslohin/commanderx16calendar](https://github.com/hermeslohin/commanderx16calendar) | [`63cdaa9`](https://github.com/hermeslohin/commanderx16calendar/commit/63cdaa94902fa4cbdfc11c5fe9a124310577713f) | CALENDAR.PRG |
